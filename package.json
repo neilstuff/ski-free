@@ -1,0 +1,50 @@
+{
+    "name": "lunar-lander",
+    "version": "1.0.0",
+    "description": "Lunar Lander",
+    "main": "main.js",
+    "scripts": {
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder --publish never",
+        "start": "electron ."
+    },
+    "build": {
+        "win": {
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                }
+            ]
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/thesourorange/lunar-lander.git"
+    },
+    "keywords": [
+        "Electron",
+        "game"
+    ],
+    "author": "GitHub",
+    "license": "CC0-1.0",
+    "dependencies": {
+        "eventedloop": "^1.1.0",
+        "hammerjs": "^2.0.8",
+        "br-mousetrap": "^1.1.3"
+    },
+    "devDependencies": {
+        "electron": "^13.1.4",
+        "electron-builder": "^22.11.7",
+        "sugar": "^2.0.6",
+        "mocha": "^9.0.1",
+        "should": "^13.2.3"
+    },
+    "bugs": {
+        "url": "https://github.com/thesourorange/lunar-lander/issues"
+    },
+    "homepage": "https://github.com/thesourorange/lunar-lander#readme"
+}
