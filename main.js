@@ -24,10 +24,10 @@ var mainWindow = null;
 function createWindow() {
 
     mainWindow = new BrowserWindow({
-        width: 1305,
-        height: 800,
-        resizable: true,
-        frame: false,
+        width: 550,
+        height: 550,
+        resizable: false,
+        frame: true,
         autoHideMenuBar: true,
 
         webPreferences: {
@@ -44,7 +44,7 @@ function createWindow() {
     }
 
     mainWindow.setMenu(null);
-    mainWindow.setTitle('Knowledge Manager') // Window name isn't this
+    mainWindow.setTitle('Ski Free') // Window name isn't this
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'html',
