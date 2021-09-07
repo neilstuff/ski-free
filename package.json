@@ -1,7 +1,7 @@
 {
-    "name": "lunar-lander",
+    "name": "ski-free",
     "version": "1.0.0",
-    "description": "Lunar Lander",
+    "description": "Ski Free",
     "main": "main.js",
     "scripts": {
         "pack": "electron-builder --dir",
@@ -10,20 +10,18 @@
     },
     "build": {
         "win": {
-            "target": [
-                {
-                    "target": "nsis",
-                    "arch": [
-                        "x64",
-                        "ia32"
-                    ]
-                }
-            ]
+            "target": [{
+                "target": "nsis",
+                "arch": [
+                    "x64",
+                    "ia32"
+                ]
+            }]
         }
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/thesourorange/lunar-lander.git"
+        "url": "git+https://github.com/thesourorange/ski-free.git"
     },
     "keywords": [
         "Electron",
@@ -39,7 +37,7 @@
         "electron-builder": "^22.11.7"
     },
     "bugs": {
-        "url": "https://github.com/thesourorange/lunar-lander/issues"
+        "url": "https://github.com/thesourorange/ski-free/issues"
     },
-    "homepage": "https://github.com/thesourorange/lunar-lander#readme"
+    "homepage": "https://github.com/thesourorange/ski-free#readme"
 }
