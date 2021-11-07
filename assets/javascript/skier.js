@@ -1,5 +1,11 @@
-export const Skier = function(skierGraphics) {
-    this.graphics = skierGraphics;
+export const createSkier = function(graphics) {
+
+    return new Skier(graphics);
+
+}
+
+const Skier = function(graphics) {
+    this.graphics = graphics;
     this.radius = 25;
     this.position = [250, 200];
     this.state = "alive";
@@ -19,9 +25,11 @@ Skier.prototype.updatePosition = function(keysPressed, level) {
     } else if (keysPressed.left && this.position[0] > 0) {
         this.position[0] = this.position[0] - moveDistance
     }
+
     if (this.jumping) {
         this.addressJumping()
     }
+
 }
 
 Skier.prototype.addressJumping = function() {
@@ -89,28 +97,27 @@ Skier.prototype.draw = function(ctx, keysPressed, pauseGame, level) {
     }
 }
 
-
-Skier.prototype.JumpDraw = function(ctx, keysPressed) {
+Skier.prototype.JumpDraw = function(context, keysPressed) {
     if (keysPressed.right) {
-        ctx.drawImage(
+        context.drawImage(
             this.graphics,
             184, 0, 28, 34,
             this.position[0], this.position[1], 28, 34
         );
     } else if (keysPressed.left) {
-        ctx.drawImage(
+        context.drawImage(
             this.graphics,
             184, 41, 30, 30,
             this.position[0], this.position[1], 30, 30
         );
     } else if (keysPressed.up) {
-        ctx.drawImage(
+        context.drawImage(
             this.graphics,
             119, 77, 30, 32,
             this.position[0], this.position[1], 30, 32
         );
     } else {
-        ctx.drawImage(
+        context.drawImage(
             this.graphics,
             86, 0, 31, 34,
             this.position[0], this.position[1], 31, 34

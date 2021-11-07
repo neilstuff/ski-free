@@ -60,10 +60,15 @@ function createWindow() {
 app.on('ready', () => {
 
     protocol.registerBufferProtocol('html', function(request, callback) {
-
         let pathName = (new URL(request.url).pathname).substring(os.platform() == 'win32' ? 1 : 0);
+        let extension = path.extname(pathName);
 
-        return callback({ data: fs.readFileSync(pathName), mimeType: mime.getType(path.extname(pathName)) });
+        if (extension == "") {
+            extension = ".js";
+            pathName += extension;
+        }
+
+        return callback({ data: fs.readFileSync(path.normalize(pathName)), mimeType: mime.getType(extension) });
 
     });
 

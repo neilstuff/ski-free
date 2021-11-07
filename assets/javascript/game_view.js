@@ -1,3 +1,9 @@
+export const createView = function(game, ctx) {
+
+    return new GameView(game, ctx);
+
+}
+
 var GameView = function(game, ctx) {
     this.game = game;
     this.ctx = ctx;
@@ -10,7 +16,6 @@ GameView.prototype.startGame = function() {
         setInterval(() => {
             this.game.updateBoard();
             this.game.draw(this.ctx);
-            // something to check the status of the game needs to go here.
         }, 30)
     }
 }

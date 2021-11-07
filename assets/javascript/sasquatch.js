@@ -1,6 +1,12 @@
+export const createSasquatch = function(graphics) {
+
+    return new Sasquatch(graphics);
+
+}
+
 var Sasquatch = function(graphics) {
     this.gotSkier = false
-    this.position = [250, -230]; ///// -230
+    this.position = [250, -230];
     this.radius = 15;
     this.graphics = graphics;
     this.direction = "left";
@@ -15,7 +21,8 @@ var Sasquatch = function(graphics) {
 
 
 Sasquatch.prototype.updatePosition = function(SkierPosition) {
-    let moveDelta = 3 //////
+    let moveDelta = 3;
+
     if (SkierPosition[0] < this.position[0] - 500) {
         this.position[0] = this.position[0] - moveDelta
         this.direction = "left";

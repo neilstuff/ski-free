@@ -1,10 +1,14 @@
-import { createGame } from './skier.js'
+import { createView } from './game_view';
+import { createHazard } from './hazard';
+import { createSasquatch } from './sasquatch';
+import { createSkier } from './skier';
+import { createUtil } from './util';
 
 const EasyWinScore = 1000
 
 export const createGame = (skierGraphics, obstacleGraphics) => {
-  
-  return new Game(skierGraphics, obstacleGraphics);
+
+    return new Game(skierGraphics, obstacleGraphics);
 
 }
 
@@ -17,8 +21,8 @@ var Game = function(skierGraphics, obstacleGraphics) {
 };
 
 Game.prototype.reset = function() {
-    this.skier = new Skier(this.skierGraphics);
-    this.sasquatch = new Sasquatch(this.skierGraphics)
+    this.skier = createSkier(this.skierGraphics);
+    this.sasquatch = createSasquatch(this.skierGraphics)
     this.keysPressed = { left: false, right: false, up: false };
     this.hazards_num = 9;
     this.hazards = [];
@@ -34,10 +38,9 @@ Game.prototype.reset = function() {
 
 Game.prototype.populateHazards = function() {
     for (var i = 0; i < this.hazards_num; i++) {
-        this.hazards.push(new Hazard(Util.randomPosition(), this.obstacleGraphics))
+        this.hazards.push(createHazard(Util.randomPosition(), this.obstacleGraphics))
     }
 }
-
 
 Game.prototype.createHazard = function() {
     if (this.hazards.length < this.hazards_num) {
@@ -48,13 +51,16 @@ Game.prototype.createHazard = function() {
         }
 
 
-        let newHazard = new Hazard(Util.randomStartPosition(), this.obstacleGraphics)
+        let newHazard = createHazard(Util.randomStartPosition(), this.obstacleGraphics)
+
         if (this.level === 'medium') {
             newHazard.moveSpeed = 7
         }
+
         if (this.level === 'hard') {
             newHazard.moveSpeed = 8
         }
+
         this.hazards.push(newHazard)
     }
 }
@@ -255,8 +261,9 @@ Game.prototype.drawNumbers = function(ctx) {
 
 }
 
-Game.prototype.WinLossMessage = function(ctx) {
+export const WinLossMessage = function(ctx) {
     var canvas = document.getElementById('myCanvas');
+
     if (this.SkierCaught) {
         ctx.fillStyle = "#fd2047";
         ctx.font = "60px 'Monoton'";
@@ -276,6 +283,5 @@ Game.prototype.WinLossMessage = function(ctx) {
         ctx.fontWeight = "bold"
 
     }
-};
 
-module.exports = Game;
+};
