@@ -1,10 +1,4 @@
-export const createUtil = function() {
-
-    return new Util();
-
-}
-
-const Util = {
+export const Util = {
 
     randomStartPosition() {
         let x_coord = Math.floor(Math.random() * 500);

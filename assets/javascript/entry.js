@@ -2,6 +2,9 @@ import { createView } from './game_view';
 import { createGame } from './game';
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    console.log('DOMContentLoaded');
+
     var skierGraphics = document.getElementById('skier');
     var obstaclesGraphics = document.getElementById('obstacles');
     var canvas = document.getElementById('myCanvas');
@@ -9,8 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var game = createGame(skierGraphics, obstaclesGraphics)
     var gameView = createView(game, context)
 
-    document.addEventListener("keydown", function(e) {
-        console.log("pressed a key");
+    gameView.startGame();
+
+    window.addEventListener("keydown", function(e) {
+        console.log("pressed a key: ", e.keyCode);
 
         if (e.keyCode == 39) {
             game.keysPressed.right = true;
@@ -21,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, false);
 
-    document.addEventListener("keyup", function(e) {
+    window.addEventListener("keyup", function(e) {
         if (e.keyCode == 39) {
             game.keysPressed.right = false;
         } else if (e.keyCode == 37) {
@@ -30,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
             game.keysPressed.up = false
         } else if (e.keyCode == 13) {
             $("canvas").removeClass("pre-canvas").addClass("play-canvas");
-            $("instructions").removeClass("pre-instructions").addClass("post-instructions");
             $("key").removeClass("key").addClass("post-key");
             gameView.startGame();
         } else if (e.keyCode == 82) {

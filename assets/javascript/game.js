@@ -2,9 +2,10 @@ import { createView } from './game_view';
 import { createHazard } from './hazard';
 import { createSasquatch } from './sasquatch';
 import { createSkier } from './skier';
-import { createUtil } from './util';
+import { Util } from './util';
 
 const EasyWinScore = 1000
+
 
 export const createGame = (skierGraphics, obstacleGraphics) => {
 
@@ -26,6 +27,9 @@ Game.prototype.reset = function() {
     this.keysPressed = { left: false, right: false, up: false };
     this.hazards_num = 9;
     this.hazards = [];
+
+    console.log('.populateHazards');
+
     this.populateHazards()
     this.level = 'easy';
     this.SkierCaught = false;
@@ -216,71 +220,77 @@ Game.prototype.updateBoard = function() {
     }
 }
 
-Game.prototype.draw = function(ctx) {
+Game.prototype.draw = function(context) {
     if (!this.pauseGame) {
         this.skier.state = "alive"
     }
 
-    ctx.clearRect(0, 0, 500, 500);
+    context.clearRect(0, 0, 500, 500);
     this.hazards.forEach(hazard => {
-        hazard.draw(ctx);
+        hazard.draw(context);
     })
 
     if (!this.SkierCaught) {
         this.score += 1
-        this.skier.draw(ctx, this.keysPressed, this.pauseGame, this.level);
-        this.sasquatch.draw(ctx, this.skier.position)
+        this.skier.draw(context, this.keysPressed, this.pauseGame, this.level);
+        this.sasquatch.draw(context, this.skier.position)
     } else {
         if (this.score >= this.winningScore) {
-            this.sasquatch.drawDeath(ctx)
+            this.sasquatch.drawDeath(context)
             this.userWins = true
         } else {
-            this.sasquatch.drawSasquatchFeeds(ctx)
+            this.sasquatch.drawSasquatchFeeds(context)
         }
     }
-    this.drawNumbers(ctx);
-    this.WinLossMessage(ctx)
+    this.drawNumbers(context);
+
+    this.winLossMessage(context)
+
 }
 
-
-
-Game.prototype.drawNumbers = function(ctx) {
+/**
+ * Draw Numbers - Score/Crashes
+ * 
+ * @param {*} context The canvas context
+ */
+Game.prototype.drawNumbers = function(context) {
     let score = "Points: " + this.score;
     let crash = "Crashes: " + this.fallCount;
 
     if (this.score > 1000) {
-        ctx.fillStyle = "#ffc0cb";
+        context.fillStyle = "#ffc0cb";
     } else {
-        ctx.fillStyle = "#ff0000"
+        context.fillStyle = "#ff0000"
     }
 
-    ctx.font = "18px 'Arial'";
-    ctx.fontWeight = "bold"
-    ctx.fillText(score, 10, 20);
-    ctx.fillText(crash, 120, 20);
+    context.font = "18px 'Arial'";
+    context.fontWeight = "bold"
+    context.fillText(score, 10, 20);
+    context.fillText(crash, 120, 20);
 
 }
 
-export const WinLossMessage = function(ctx) {
+
+Game.prototype.winLossMessage = function(context) {
     var canvas = document.getElementById('myCanvas');
 
     if (this.SkierCaught) {
-        ctx.fillStyle = "#fd2047";
-        ctx.font = "60px 'Monoton'";
+        context.fillStyle = "#fd2047";
+        context.font = "60px 'Monoton'";
         var Message = "You Lose";
         if (this.userWins) {
             Message = "You Win!!";
         }
-        var MessageTextWidth = ctx.measureText(Message).width;
-        ctx.fillText(
+        var MessageTextWidth = context.measureText(Message).width;
+        context.fillText(
             Message,
             (canvas.width / 2) - (MessageTextWidth / 2),
             100
         );
 
-        ctx.font = "22px 'Arial'";
-        ctx.fillStyle = "#000000";
-        ctx.fontWeight = "bold"
+        context.font = "22px 'Arial'";
+        context.fillStyle = "#000000";
+        context.fontWeight = "bold"
 
     }
 
