@@ -27,9 +27,6 @@ Game.prototype.reset = function() {
     this.keysPressed = { left: false, right: false, up: false };
     this.hazards_num = 9;
     this.hazards = [];
-
-    console.log('.populateHazards');
-
     this.populateHazards()
     this.level = 'easy';
     this.SkierCaught = false;
@@ -74,13 +71,15 @@ Game.prototype.avoidOverlapPosition = function(position) {
     let posX = position[0];
     let posY = position[1];
     let result = true
+
     latestHazards.forEach(hazard => {
         let hazX = hazard.position[0];
         let hazY = hazard.position[1];
         if (posX < hazX + 20 && posX > hazX - 20) {
             result = false
         }
-    })
+    });
+
     return !result
 }
 
@@ -242,6 +241,7 @@ Game.prototype.draw = function(context) {
             this.sasquatch.drawSasquatchFeeds(context)
         }
     }
+
     this.drawNumbers(context);
 
     this.winLossMessage(context)
@@ -277,11 +277,9 @@ Game.prototype.winLossMessage = function(context) {
     if (this.SkierCaught) {
         context.fillStyle = "#fd2047";
         context.font = "60px 'Monoton'";
-        var Message = "You Lose";
-        if (this.userWins) {
-            Message = "You Win!!";
-        }
+        var Message = (this.userWins) ? "You Win!!" : "You Lose";
         var MessageTextWidth = context.measureText(Message).width;
+
         context.fillText(
             Message,
             (canvas.width / 2) - (MessageTextWidth / 2),

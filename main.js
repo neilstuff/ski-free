@@ -24,7 +24,7 @@ var mainWindow = null;
 function createWindow() {
 
     mainWindow = new BrowserWindow({
-        width: (config.mode == "debug") ? 900 : 550,
+        width: (config.mode == "debug") ? 900 : 530,
         height: 550,
         resizable: false,
         frame: true,
