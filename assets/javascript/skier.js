@@ -50,13 +50,13 @@ Skier.prototype.addressJumping = function() {
     }
 }
 
-Skier.prototype.draw = function(ctx, keysPressed, pauseGame, level) {
+Skier.prototype.draw = function(context, keysPressed, pauseGame, level) {
     if (!pauseGame) {
         this.updatePosition(keysPressed, level);
     }
 
     if (this.jumping) {
-        this.JumpDraw(ctx, keysPressed);
+        this.JumpDraw(context, keysPressed);
         return;
     }
 
@@ -65,19 +65,19 @@ Skier.prototype.draw = function(ctx, keysPressed, pauseGame, level) {
             {
                 if (!pauseGame) {
                     if (keysPressed.left) {
-                        ctx.drawImage(
+                        context.drawImage(
                             this.graphics,
                             49, 37, 17, 34,
                             this.position[0], this.position[1], 17, 34
                         );
                     } else if (keysPressed.right) {
-                        ctx.drawImage(
+                        context.drawImage(
                             this.graphics,
                             49, 0, 17, 34,
                             this.position[0], this.position[1], 17, 34
                         );
                     } else {
-                        ctx.drawImage(
+                        context.drawImage(
                             this.graphics,
                             65, 0, 17, 34,
                             this.position[0], this.position[1], 17, 34
@@ -88,7 +88,7 @@ Skier.prototype.draw = function(ctx, keysPressed, pauseGame, level) {
             break;
         case "crashed":
             {
-                ctx.drawImage(
+                context.drawImage(
                     this.graphics,
                     240, 0, 31, 31,
                     this.position[0], this.position[1], 31, 31

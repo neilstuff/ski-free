@@ -27,9 +27,9 @@ Game.prototype.reset = function() {
     this.keysPressed = { left: false, right: false, up: false };
     this.hazards_num = 9;
     this.hazards = [];
+    this.SkierCaught = false;
     this.populateHazards()
     this.level = 'easy';
-    this.SkierCaught = false;
     this.jumping = false;
     this.pauseGame = false;
     this.score = 0;
@@ -38,7 +38,7 @@ Game.prototype.reset = function() {
 }
 
 Game.prototype.populateHazards = function() {
-    for (var i = 0; i < this.hazards_num; i++) {
+    for (var i = 0; i < this.hazards_num && !this.SkierCaught; i++) {
         this.hazards.push(createHazard(Util.randomPosition(), this.obstacleGraphics))
     }
 }
@@ -50,7 +50,6 @@ Game.prototype.createHazard = function() {
         while (this.avoidOverlapPosition(Hazardposition)) {
             Hazardposition = Util.randomStartPosition()
         }
-
 
         let newHazard = createHazard(Util.randomStartPosition(), this.obstacleGraphics)
 
@@ -84,9 +83,12 @@ Game.prototype.avoidOverlapPosition = function(position) {
 }
 
 Game.prototype.moveHazards = function() {
-    this.hazards.forEach(hazard => {
-        hazard.move()
-    })
+
+    if (!this.SkierCaught) {
+        this.hazards.forEach(hazard => {
+            hazard.move()
+        })
+    }
 }
 
 Game.prototype.deleteHazards = function() {
@@ -101,6 +103,7 @@ Game.prototype.deleteHazards = function() {
             updatedHazards.push(this.hazards[i])
         }
     }
+
     this.hazards = updatedHazards
 }
 
@@ -225,6 +228,7 @@ Game.prototype.draw = function(context) {
     }
 
     context.clearRect(0, 0, 500, 500);
+
     this.hazards.forEach(hazard => {
         hazard.draw(context);
     })
@@ -254,19 +258,19 @@ Game.prototype.draw = function(context) {
  * @param {*} context The canvas context
  */
 Game.prototype.drawNumbers = function(context) {
-    let score = "Points: " + this.score;
+    let score = "Timer: " + this.score;
     let crash = "Crashes: " + this.fallCount;
 
     if (this.score > 1000) {
-        context.fillStyle = "#ffc0cb";
+        context.fillStyle = "#000000";
     } else {
-        context.fillStyle = "#ff0000"
+        context.fillStyle = "#000000"
     }
 
-    context.font = "18px 'Arial'";
+    context.font = "14px 'W95FA'";
     context.fontWeight = "bold"
     context.fillText(score, 10, 20);
-    context.fillText(crash, 120, 20);
+    context.fillText(crash, 80, 20);
 
 }
 
@@ -275,24 +279,28 @@ Game.prototype.winLossMessage = function(context) {
     var canvas = document.getElementById('myCanvas');
 
     if (this.SkierCaught) {
-        context.fillStyle = "#fd2047";
-        context.font = "60px 'Monoton'";
-        var Message = (this.userWins) ? "You Win!!" : "You Lose";
-        var MessageTextWidth = context.measureText(Message).width;
 
-        context.fillText(
-            Message,
-            (canvas.width / 2) - (MessageTextWidth / 2),
-            100
-        );
+        window.setTimeout((game, context) => {
+            this.SkierCaught = false;
+            game.view.stopGame();
 
-        context.font = "22px 'Arial'";
-        context.fillStyle = "#000000";
-        context.fontWeight = "bold"
+            context.clearRect(0, 0, 500, 500);
+            context.drawImage(
+                document.getElementById('yeti-dance'),
+                220, 130
+            );
 
-        setTimeout((game) => {
+            context.font = "18px 'W95FA'";
+            context.fontWeight = "bold"
+            context.fillText("Restarting...", 220, 250);
+
             game.reset();
-        }, 1000, this);
+
+            window.setTimeout((game, context) => {
+                game.view.startGame();
+            }, 200, game, context);
+
+        }, 3000, this, context);
 
     }
 

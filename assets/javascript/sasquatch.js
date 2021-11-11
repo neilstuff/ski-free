@@ -126,68 +126,68 @@ Sasquatch.prototype.updateEatFrameTimer = function() {
 
 
 
-Sasquatch.prototype.drawSasquatchFeeds = function(ctx) {
+Sasquatch.prototype.drawSasquatchFeeds = function(context) {
     this.updateEatFrameTimer();
 
     switch (this.eatFrame) {
         case 0:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 35, 112, 25, 43,
                 this.position[0], this.position[1], 25, 43
             );
             break;
         case 1:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 0, 112, 32, 43,
                 this.position[0], this.position[1], 32, 43
             );
             break;
         case 2:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 122, 112, 34, 43,
                 this.position[0], this.position[1], 34, 43
             );
             break;
         case 3:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 156, 112, 31, 43,
                 this.position[0], this.position[1], 31, 43
             );
             break;
         case 4:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 187, 112, 31, 43,
                 this.position[0], this.position[1], 31, 43
             );
             break;
         case 5:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 219, 112, 25, 43,
                 this.position[0], this.position[1], 25, 43
             );
             break;
         case 6:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 243, 112, 26, 43,
                 this.position[0], this.position[1], 26, 43
             );
             break;
         case 7:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 35, 112, 25, 43,
                 this.position[0], this.position[1], 25, 43
             );
             break;
         case 8:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 0, 112, 32, 43,
                 this.position[0], this.position[1], 32, 43
@@ -216,62 +216,62 @@ Sasquatch.prototype.updateDeathFrameTimer = function() {
 }
 
 
-Sasquatch.prototype.drawDeath = function(ctx) {
+Sasquatch.prototype.drawDeath = function(context) {
     this.updateDeathFrameTimer()
 
     switch (this.deathFrame) {
 
         case 0:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 91, 349, 19, 27,
                 this.position[0], this.position[1] + 8, 19, 27
             );
             break;
         case 1:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 112, 349, 18, 28,
                 this.position[0], this.position[1] + 8, 18, 28
             );
             break;
         case 2:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 130, 349, 18, 28,
                 this.position[0] + 4, this.position[1] + 8, 18, 28
             );
             break;
         case 3:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 148, 348, 24, 28,
                 this.position[0] + 5, this.position[1] + 8, 24, 28
             );
             break;
         case 4:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 171, 348, 25, 28,
                 this.position[0], this.position[1] + 8, 25, 28
             );
             break;
         case 5:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 194, 348, 35, 28,
                 this.position[0] + 6, this.position[1] + 8, 35, 28
             );
             break;
         case 6:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 31, 410, 44, 69,
                 this.position[0] + 8, this.position[1] - 2, 44, 69
             );
             break;
         case 7:
-            ctx.drawImage(
+            context.drawImage(
                 this.graphics,
                 78, 411, 47, 44,
                 this.position[0] + 14, this.position[1] + 4, 47, 44
@@ -279,14 +279,14 @@ Sasquatch.prototype.drawDeath = function(ctx) {
     }
 
     if (this.deathFrame < 6) {
-        ctx.drawImage(
+        context.drawImage(
             this.graphics,
             0, 112, 32, 43,
             this.position[0] + 28, this.position[1] - 8, 32, 43
         );
     }
     if (this.deathFrame === 7) {
-        ctx.drawImage(
+        context.drawImage(
             this.graphics,
             184, 0, 28, 34,
             this.position[0] - 8, this.position[1] + 2, 28, 34
