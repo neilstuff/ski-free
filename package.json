@@ -10,18 +10,20 @@
     },
     "build": {
         "win": {
-            "target": [{
-                "target": "nsis",
-                "arch": [
-                    "x64",
-                    "ia32"
-                ]
-            }]
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                }
+            ]
         }
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/thesourorange/ski-free.git"
+        "url": "git+https://github.com/thesourorange/neilstuff/ski-free.git"
     },
     "keywords": [
         "Electron",

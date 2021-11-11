@@ -290,6 +290,10 @@ Game.prototype.winLossMessage = function(context) {
         context.fillStyle = "#000000";
         context.fontWeight = "bold"
 
+        setTimeout((game) => {
+            game.reset();
+        }, 1000, this);
+
     }
 
 };

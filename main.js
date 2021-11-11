@@ -28,6 +28,12 @@ function createWindow() {
         height: 550,
         resizable: false,
         frame: true,
+        maximizable: false,
+        minHeight:550,
+        minWidth: (config.mode == "debug") ? 900 : 530,
+        maxHeight:550,
+        maxWidth: (config.mode == "debug") ? 900 : 530,
+        fullscreenable: false,
         autoHideMenuBar: true,
 
         webPreferences: {
