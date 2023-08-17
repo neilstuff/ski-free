@@ -2,6 +2,7 @@
     "name": "ski-free",
     "version": "1.0.0",
     "description": "Ski Free",
+    "email": "thesourorange@brittliff.org",
     "main": "main.js",
     "scripts": {
         "pack": "electron-builder --dir",
@@ -19,6 +20,12 @@
                     ]
                 }
             ]
+        },
+        "linux": {
+            "target": [
+                "snap"
+            ],
+            "category": "Game"
         }
     },
     "repository": {
@@ -29,14 +36,14 @@
         "Electron",
         "game"
     ],
-    "author": "GitHub",
+    "author": "thesouorange <thesouroange@brittliff.org>",
     "license": "CC0-1.0",
     "dependencies": {
         "jquery": "^3.6.0",
         "mime": "^3.0.0"
     },
     "devDependencies": {
-        "electron": "^15.3.1",
+        "electron": "^19.0.6",
         "electron-builder": "^22.11.7"
     },
     "bugs": {
